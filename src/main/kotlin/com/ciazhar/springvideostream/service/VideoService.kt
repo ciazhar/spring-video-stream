@@ -1,6 +1,7 @@
 package com.ciazhar.springvideostream.service
 
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.InputStreamResource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
@@ -15,7 +16,8 @@ class VideoService {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
-    private val VIDEO_ROOT = "/home/ciazhar/"
+    @Value("\${video.root}")
+    private lateinit var VIDEO_ROOT : String
 
     fun streamSingleVideo(id : String, request: HttpServletRequest): ResponseEntity<InputStreamResource> {
         val file = File(VIDEO_ROOT+"/"+id)
